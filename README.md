@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Smart Issue Board
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+Smart Issue Board is a simple issue tracking application built to simulate real-world issue management workflows. The application allows users to authenticate, create issues, detect similar issues, track issue status, and manage issue lifecycle efficiently.
 
-## Available Scripts
+This project was developed as part of an internship assignment to demonstrate practical problem-solving, backend data modeling, and workflow design.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Tech Stack Used
+- **Frontend:** React (Functional Components, Hooks)
+- **Backend & Database:** Firebase Firestore
+- **Authentication:** Firebase Email/Password Authentication
+- **Hosting:** Vercel
+- **Code Hosting:** GitHub
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Authentication Flow
+Users can sign up and log in using email and password. Firebase Authentication securely manages user sessions. The logged-in user's email is displayed and used to associate issues with their creator.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Firestore Data Structure
+A single collection named `issues` is used.
 
-### `npm run build`
+Each issue document contains:
+- `title` – Issue summary
+- `description` – Detailed explanation
+- `priority` – Low / Medium / High
+- `status` – Open / In Progress / Done
+- `assignedTo` – Assigned user or team
+- `createdBy` – Logged-in user email
+- `createdAt` – Server timestamp
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Similar Issue Detection
+To detect similar issues, the application uses a keyword-based comparison approach:
+- Issue titles are broken into meaningful keywords.
+- Existing issue titles are compared using overlapping keywords.
+- If two or more keywords match, the issue is considered similar.
+- The user is warned and allowed to either continue or cancel.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This approach is simple, explainable, and avoids over-engineering while still providing intelligent behavior.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Issue Lifecycle Rule
+A business rule is enforced where an issue cannot move directly from **Open** to **Done**.
+The allowed workflow is:
+Open → In Progress → Done
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A friendly message is shown if a user attempts to skip the workflow.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Challenges Faced
+- Understanding Firestore querying and updates
+- Designing similarity detection without external AI APIs
+- Enforcing workflow rules in a user-friendly way
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Future Improvements
+- Role-based access (Admin / User)
+- Advanced similarity detection using NLP
+- Pagination for large issue lists
+- Better UI and UX enhancements
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Conclusion
+This project focuses on clarity, correctness, and real-world reasoning rather than over-engineering. The design decisions prioritize maintainability, usability, and practical problem-solving.
