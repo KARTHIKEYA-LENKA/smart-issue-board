@@ -104,11 +104,15 @@ function CreateIssue() {
       />
       <br /><br />
 
-      <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-        <option>Low</option>
-        <option>Medium</option>
-        <option>High</option>
-      </select>
+      <label>Priority:</label>
+<select
+  value={priority}
+  onChange={(e) => setPriority(e.target.value)}
+>
+  <option value="Low">Low</option>
+  <option value="Medium">Medium</option>
+  <option value="High">High</option>
+</select>
       <br /><br />
 
       <input
