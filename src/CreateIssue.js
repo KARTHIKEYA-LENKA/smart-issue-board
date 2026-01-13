@@ -7,9 +7,7 @@ import {
   getDocs
 } from "firebase/firestore";
 
-/* -------------------------
-   SMART TOKEN GENERATOR
---------------------------*/
+
 const generateTokens = (text) => {
   return text
     .toLowerCase()
@@ -31,9 +29,7 @@ function CreateIssue() {
 
 
     try {
-      /* -------------------------
-         SIMILAR ISSUE CHECK
-      --------------------------*/
+     
       const issueTokens = generateTokens(title);
       const snapshot = await getDocs(collection(db, "issues"));
 
@@ -59,9 +55,6 @@ function CreateIssue() {
         if (!confirmCreate) return;
       }
 
-      /* -------------------------
-         CREATE ISSUE IN FIRESTORE
-      --------------------------*/
       await addDoc(collection(db, "issues"), {
         title: title,
         description: description,
